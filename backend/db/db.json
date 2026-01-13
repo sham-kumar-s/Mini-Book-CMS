@@ -1,0 +1,61 @@
+{
+  "books": [
+    {
+      "id": "book_001",
+      "title": "My Book",
+      "description": "A great book",
+      "indexVersion": 1
+    },
+    {
+      "id": "book_001",
+      "title": "My Book",
+      "description": "Test book",
+      "indexVersion": 1
+    }
+  ],
+  "chapters": [
+    {
+      "id": "chapter_001",
+      "bookId": "book_001",
+      "title": "Chapter 1"
+    },
+    {
+      "id": "chapter_002",
+      "bookId": "book_001",
+      "title": "Chapter 1"
+    },
+    {
+      "id": "chapter_003",
+      "bookId": "book_001",
+      "title": "Chapter 1"
+    },
+    {
+      "id": "chapter_004",
+      "bookId": "book_001",
+      "title": "Chapter 1"
+    },
+    {
+      "id": "chapter_005",
+      "bookId": "book_001",
+      "title": "Chapter 1"
+    },
+    {
+      "id": "chapter_001",
+      "bookId": "book_001",
+      "title": "Chapter 1"
+    },
+    {
+      "id": "chapter_002",
+      "bookId": "book_001",
+      "title": "Chapter 1"
+    }
+  ],
+  "pages": [
+    {
+      "id": "page_001",
+      "chapterId": "chapter_001",
+      "title": "Page 1",
+      "currentVersion": 1
+    }
+  ]
+}
