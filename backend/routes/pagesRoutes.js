@@ -8,4 +8,4 @@ router.put("/:pageId", updatePage);
 router.get("/:pageId/versions", getVersions);
 router.post("/:pageId/restore/:versionId", restoreVersion);
 
-export default router;
+export default router; 
