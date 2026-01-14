@@ -1,8 +1,10 @@
 import express from "express";
-import { createPage,updatePage,getVersions,restoreVersion } from "../controllers/pagesControllers.js";
+import { createPage, updatePage, getVersions, restoreVersion, getAllPages } from "../controllers/pagesControllers.js";
 
 const router = express.Router();
 
+
+router.get("/", getAllPages);
 router.post("/:chapterId", createPage);
 router.put("/:pageId", updatePage);
 router.get("/:pageId/versions", getVersions);

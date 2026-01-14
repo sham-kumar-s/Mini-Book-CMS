@@ -7,6 +7,15 @@ export const createPage = async (req, res) => {
   const { title, content } = req.body;
   const { chapterId } = req.params;
 
+  if (!title) {
+    return res.status(400).json({ error: "Page title is required" });
+  }
+
+  const chapterExists = db.data.chapters.find(c => c.id === chapterId);
+  if (!chapterExists) {
+    return res.status(404).json({ error: `Chapter '${chapterId}' not found` });
+  }
+
   const pageId = generateId("page");
 
   const basePath = path.join(
@@ -31,11 +40,22 @@ export const createPage = async (req, res) => {
   res.json({ message: "Page created", pageId });
 };
 
+export const getAllPages = async (req, res) => {
+  await db.read();
+  res.json(db.data.pages);
+};
+
+
 export const updatePage = async (req, res) => {
   const { content } = req.body;
   const { pageId } = req.params;
 
   const page = db.data.pages.find(p => p.id === pageId);
+  
+  if (!page) {
+    return res.status(404).json({ error: `Page '${pageId}' not found` });
+  }
+  
   const chapter = db.data.chapters.find(c => c.id === page.chapterId);
 
   const basePath = path.join(
@@ -61,6 +81,10 @@ export const getVersions = async (req, res) => {
   const { pageId } = req.params;
   const page = db.data.pages.find(p => p.id === pageId);
 
+  if (!page) {
+    return res.status(404).json({ error: `Page '${pageId}' not found` });
+  }
+
   const versions = [];
   for (let i = 1; i <= page.currentVersion; i++) {
     versions.push(`v${i}.json`);
@@ -72,6 +96,10 @@ export const getVersions = async (req, res) => {
 export const restoreVersion = async (req, res) => {
   const { pageId, versionId } = req.params;
   const page = db.data.pages.find(p => p.id === pageId);
+
+  if (!page) {
+    return res.status(404).json({ error: `Page '${pageId}' not found` });
+  }
   const chapter = db.data.chapters.find(c => c.id === page.chapterId);
 
   const basePath = path.join(

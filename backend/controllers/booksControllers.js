@@ -6,6 +6,10 @@ import { saveVersion } from "../utils/fileStorage.js";
 export const createBook = async (req,res) => {
     const { title,description } = req.body;
 
+    if (!title || !description) {
+        return res.status(400).json({ error: "Title and description are required" });
+    }
+
     const bookId = generateId("Book");
     const indexPath = path.join("storage/books" , bookId , "index");
 
@@ -21,4 +25,9 @@ export const createBook = async (req,res) => {
     await db.write();
 
     res.json({message:"Book created successfully",bookId});
+}
+
+export const getAllBooks = async (req, res) => {
+    await db.read();
+    res.json(db.data.books);
 }

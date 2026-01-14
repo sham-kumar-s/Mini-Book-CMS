@@ -2,20 +2,8 @@
   "books": [
     {
       "id": "book_001",
-      "title": "My Book",
-      "description": "A great book",
-      "indexVersion": 1
-    },
-    {
-      "id": "book_001",
-      "title": "My Book",
-      "description": "Test book",
-      "indexVersion": 1
-    },
-    {
-      "id": "book_001",
-      "title": "Jungle King",
-      "description": "Mufasa",
+      "title": "Book-1",
+      "description": "First Book ",
       "indexVersion": 1
     }
   ],
@@ -23,44 +11,14 @@
     {
       "id": "chapter_001",
       "bookId": "book_001",
-      "title": "Chapter 1"
-    },
-    {
-      "id": "chapter_002",
-      "bookId": "book_001",
-      "title": "Chapter 1"
-    },
-    {
-      "id": "chapter_003",
-      "bookId": "book_001",
-      "title": "Chapter 1"
-    },
-    {
-      "id": "chapter_004",
-      "bookId": "book_001",
-      "title": "Chapter 1"
-    },
-    {
-      "id": "chapter_005",
-      "bookId": "book_001",
-      "title": "Chapter 1"
-    },
-    {
-      "id": "chapter_001",
-      "bookId": "book_001",
-      "title": "Chapter 1"
-    },
-    {
-      "id": "chapter_002",
-      "bookId": "book_001",
-      "title": "Chapter 1"
+      "title": "Chapter-1"
     }
   ],
   "pages": [
     {
       "id": "page_001",
       "chapterId": "chapter_001",
-      "title": "Page 1",
+      "title": "Page-1",
       "currentVersion": 4
     }
   ]
