@@ -11,6 +11,12 @@
       "title": "My Book",
       "description": "Test book",
       "indexVersion": 1
+    },
+    {
+      "id": "book_001",
+      "title": "Jungle King",
+      "description": "Mufasa",
+      "indexVersion": 1
     }
   ],
   "chapters": [
@@ -55,7 +61,7 @@
       "id": "page_001",
       "chapterId": "chapter_001",
       "title": "Page 1",
-      "currentVersion": 1
+      "currentVersion": 4
     }
   ]
 }

@@ -1,7 +1,7 @@
 import path from "path";
 import { db } from "../utils/db.js";
 import generateId from "../utils/idGenerator.js";
-import { saveVersion } from "../utils/fileStorage.js";
+import { saveVersion,readVersion } from "../utils/fileStorage.js";
 
 export const createPage = async (req, res) => {
   const { title, content } = req.body;
@@ -70,7 +70,7 @@ export const getVersions = async (req, res) => {
 };
 
 export const restoreVersion = async (req, res) => {
-  const { pageId, version } = req.params;
+  const { pageId, versionId } = req.params;
   const page = db.data.pages.find(p => p.id === pageId);
   const chapter = db.data.chapters.find(c => c.id === page.chapterId);
 
@@ -84,7 +84,7 @@ export const restoreVersion = async (req, res) => {
   );
 
   const oldContent = await readVersion(
-    path.join(basePath, `v${version}.json`)
+    path.join(basePath, `v${versionId}.json`)
   );
 
   const newVersion = page.currentVersion + 1;
