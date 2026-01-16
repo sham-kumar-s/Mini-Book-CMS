@@ -1,25 +1,5 @@
 {
-  "books": [
-    {
-      "id": "book_001",
-      "title": "Book-1",
-      "description": "First Book ",
-      "indexVersion": 1
-    }
-  ],
-  "chapters": [
-    {
-      "id": "chapter_001",
-      "bookId": "book_001",
-      "title": "Chapter-1"
-    }
-  ],
-  "pages": [
-    {
-      "id": "page_001",
-      "chapterId": "chapter_001",
-      "title": "Page-1",
-      "currentVersion": 4
-    }
-  ]
+  "books": [],
+  "chapters": [],
+  "pages": []
 }
