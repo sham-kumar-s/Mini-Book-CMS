@@ -4,6 +4,7 @@ import api from "../api/api";
 export default function VersionHistory({ pageId }) {
   const [versions, setVersions] = useState([]);
   const [localPageId, setLocalPageId] = useState("");
+  const [editorName, setEditorName] = useState("");
 
   const loadVersions = async () => {
     const idToUse = localPageId || pageId;
@@ -24,20 +25,24 @@ export default function VersionHistory({ pageId }) {
     }
   };
 
-  const restoreVersion = async (version) => {
+  const restoreVersion = async (versionObj) => {
     const idToUse = localPageId || pageId;
-    const v = version.replace("v", "").replace(".json", "");
     
     try {
-      const res = await api.post(`/pages/${idToUse}/restore/${v}`);
+      const res = await api.post(`/pages/${idToUse}/restore/${versionObj.version}`, { editorName });
       alert(`Restored → New Version: v${res.data.newVersion}`);
     } catch (error) {
       if (error.response?.status === 404) {
-        alert(`Not Found: Page '${idToUse}' or version '${v}' does not exist`);
+        alert(`Not Found: Page '${idToUse}' or version '${versionObj.version}' does not exist`);
       } else {
         alert(`Error: ${error.response?.data?.error || error.message}`);
       }
     }
+  };
+
+  const formatTimestamp = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleString();
   };
 
   return (
@@ -49,12 +54,19 @@ export default function VersionHistory({ pageId }) {
         onChange={e => setLocalPageId(e.target.value)} 
       />
       <br />
+      <input 
+        placeholder="Editor Name (for restore, optional)" 
+        onChange={e => setEditorName(e.target.value)} 
+      />
+      <br />
       <button onClick={loadVersions}>Load Versions</button>
 
       <ul>
         {versions.map(v => (
-          <li key={v}>
-            {v}
+          <li key={v.version} style={{ marginBottom: "10px" }}>
+            <strong>Version {v.version}</strong><br />
+            <em>Date: {formatTimestamp(v.timestamp)}</em><br />
+            <em>Editor: {v.editorName}</em><br />
             <button onClick={() => restoreVersion(v)}>Restore</button>
           </li>
         ))}

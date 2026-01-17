@@ -5,6 +5,7 @@ export default function PageForm() {
   const [chapterId, setChapterId] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [editorName, setEditorName] = useState("");
   const [pages, setPages] = useState([]);
 
   useEffect(() => {
@@ -20,7 +21,8 @@ export default function PageForm() {
     try {
       const res = await api.post(`/pages/${chapterId}`, {
         title,
-        content
+        content,
+        editorName
       });
       alert(`Page Created: ${res.data.pageId}`);
       fetchPages(); // Refresh list after creating
@@ -43,6 +45,8 @@ export default function PageForm() {
       <input placeholder="Page Title" onChange={e => setTitle(e.target.value)} />
       <br />
       <textarea placeholder="Content" onChange={e => setContent(e.target.value)} />
+      <br />
+      <input placeholder="Editor Name (optional)" onChange={e => setEditorName(e.target.value)} />
       <br />
       <button onClick={createPage}>Create Page</button>
 

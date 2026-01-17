@@ -4,6 +4,7 @@ import api from "../api/api";
 export default function ChapterForm() {
   const [bookId, setBookId] = useState("");
   const [title, setTitle] = useState("");
+  const [order, setOrder] = useState("");
   const [chapters, setChapters] = useState([]);
 
   useEffect(() => {
@@ -17,8 +18,12 @@ export default function ChapterForm() {
 
   const createChapter = async () => {
     try {
-      const res = await api.post(`/chapters/${bookId}`, { title });
-      alert(`Chapter Created: ${res.data.chapterId}`);
+      const payload = { title };
+      if (order) {
+        payload.order = parseInt(order);
+      }
+      const res = await api.post(`/chapters/${bookId}`, payload);
+      alert(`Chapter Created: ${res.data.chapterId}\nOrder: ${res.data.order}`);
       fetchChapters(); // Refresh list after creating
     } catch (error) {
       if (error.response?.status === 404) {
@@ -38,6 +43,13 @@ export default function ChapterForm() {
       <br />
       <input placeholder="Chapter Title" onChange={e => setTitle(e.target.value)} />
       <br />
+      <input 
+        type="number" 
+        placeholder="Order (optional, auto-increments)" 
+        min="1"
+        onChange={e => setOrder(e.target.value)} 
+      />
+      <br />
       <button onClick={createChapter}>Create Chapter</button>
 
       <h4 style={{ marginTop: "2rem" }}>Existing Chapters</h4>
@@ -45,7 +57,7 @@ export default function ChapterForm() {
         {chapters.map(chapter => (
           <li key={chapter.id}>
             <strong>{chapter.title}</strong> (ID: {chapter.id})<br />
-            <em>Book ID: {chapter.bookId}</em>
+            <em>Book ID: {chapter.bookId} | Order: {chapter.order}</em>
           </li>
         ))}
       </ul>

@@ -4,6 +4,7 @@ import api from "../api/api.js";
 export default function BookForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [numberOfPages, setNumberOfPages] = useState(0);
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -17,8 +18,12 @@ export default function BookForm() {
 
   const createBook = async () => {
     try {
-      const res = await api.post("/books", { title, description });
-      alert(`Book Created: ${res.data.bookId}`);
+      const res = await api.post("/books", { 
+        title, 
+        description, 
+        numberOfPages: parseInt(numberOfPages) || 0 
+      });
+      alert(`Book Created: ${res.data.bookId}\nPages Created: ${res.data.pagesCreated}`);
       fetchBooks(); // Refresh list after creating
     } catch (error) {
       if (error.response?.status === 400) {
@@ -35,6 +40,13 @@ export default function BookForm() {
       <input placeholder="Title" onChange={e => setTitle(e.target.value)} />
       <br />
       <input placeholder="Description" onChange={e => setDescription(e.target.value)} />
+      <br />
+      <input 
+        type="number" 
+        placeholder="Number of Initial Pages (optional)" 
+        min="0"
+        onChange={e => setNumberOfPages(e.target.value)} 
+      />
       <br />
       <button onClick={createBook}>Create Book</button>
 

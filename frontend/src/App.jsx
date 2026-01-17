@@ -4,6 +4,7 @@ import BookForm from "./components/BookForm.jsx";
 import ChapterForm from "./components/ChapterForm.jsx";
 import PageForm from "./components/PageForm.jsx";
 import PageEditor from "./components/PageEditor.jsx";
+import IndexEditor from "./components/IndexEditor.jsx";
 import VersionHistory from "./components/VersionHistory.jsx";
 
 function App() {
@@ -28,6 +29,12 @@ function App() {
         </div>
         <div className="card-container">
           <PageEditor pageId={pageId} setPageId={setPageId} />
+        </div>
+      </div>
+
+      <div className="section-row">
+        <div className="card-container" style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <IndexEditor />
         </div>
       </div>
 
