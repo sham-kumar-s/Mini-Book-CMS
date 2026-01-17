@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <h2 className="app-title">📘 Mini Book CMS (Simple UI)</h2>
+      <h2 className="app-title"> Mini Book CMS</h2>
 
       <div className="section-row">
         <div className="card-container">
