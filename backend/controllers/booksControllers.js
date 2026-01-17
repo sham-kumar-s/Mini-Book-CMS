@@ -32,7 +32,8 @@ export const createBook = async (req,res) => {
         db.data.chapters.push({
             id: defaultChapterId,
             bookId,
-            title: "Chapter 1"
+            title: "Chapter 1",
+            order: 1
         });
 
         // Create the specified number of empty pages
